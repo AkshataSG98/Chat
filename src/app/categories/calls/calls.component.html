@@ -1,0 +1,32 @@
+<!-- <h3>Recent</h3> -->
+<div class="calls-details">
+    
+</div>
+<div class="calls-list">
+    <h4>Today calls</h4>
+    <div *ngFor="let call of calls; let i = index" class="calls-items"
+        (contextmenu)="onRightClick($event, i)">
+         <img [src]="call.logo" alt="{{ call.name}}'s logo" class="calls-logo">
+         <span class="calls-name" [ngClass]="{'missed-call': call.type === 'incoming' }">{{ call.name }}
+          
+         </span>
+         
+         <span class="arrow" *ngIf="call.type === 'outgoing'"> &#8598;</span>
+         <span class="arrow-1" *ngIf="call.type === 'incoming'"> &#8599;</span>
+         <span class="date">{{ call.date}}</span>
+         <span class="data">{{ call.data}}</span>
+         <span class="time">{{ call.time}}</span>
+        
+         <span class="type" [ngClass]="{ 'outgoing':call.type === 'outgoing','incoming': call.type === 'incoming'}">{{ call.type }}</span> 
+          <span class="phone-icon">
+          <i class="fa-solid fa-phone"  [ngClass]="{'incoming': call.type === 'incoming', 'outgoing': call.type === 'outgoing'}"></i>
+         
+        </span>
+</div>
+<div *ngIf="showContextMenu" class="context-menu" [ngStyle]="{'top.px': contextMenuPosition.y, 'left.px': contextMenuPosition.x}">
+  <ul>
+    <li (click)="deleteCall(selectedIndex)">Delete</li>
+  </ul>
+
+</div>
+</div>

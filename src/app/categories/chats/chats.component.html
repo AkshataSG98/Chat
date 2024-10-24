@@ -1,0 +1,48 @@
+<div class="chat-container">
+    <div class="chats">
+        <div *ngFor="let contact of contacts" class="chat" (click)="selectChat(contact)">
+            <div><img [src]="contact.profile"></div>
+            <a href="#">
+                <div class="msg">
+                    <div>
+                        <h3>{{contact.name}}</h3>
+                    </div>
+                    <div>
+                        <p>{{contact.lastMsg}}</p>
+                    </div>
+                </div>
+                <span *ngIf="unreadCount > 0" class="badge">{{ unreadCount }}</span>
+            </a>
+            <div class="favorite-container">
+                <i class="bx" [ngClass]="{'bxs-heart': isFavorite, 'bx-heart': !isFavorite}" (click)="toggleFavorite($event)"
+                    title="Add to Favorite"></i>
+            </div>
+        </div>
+    </div>
+    <div class="messages" *ngIf="selectedContact">
+        <div class="message-container">
+            <div>
+                <header>
+                    <div>
+                    <button><i class='bx bx-arrow-back'></i></button>
+                    <button><img [src]="selectedContact.profile"></button>
+                    <button><h4>{{selectedContact.name}}</h4></button></div><div>
+                    <button><i class='bx bxs-phone-call'></i></button>
+                    <button><i class='bx bxs-video'></i></button>
+                    <button type="menu"><i class='bx bx-dots-vertical-rounded'></i></button></div>
+                </header>
+            </div>
+            <div class="message-filed">
+                <div *ngFor="let message of messages" class="message">
+                    <strong>{{ message.user }}:</strong> {{ message.text }}
+                </div>
+            </div>  
+        </div>
+        <div class="chat-input">
+            <button (click)="toggleEmojiPicker()"><i class='bx bx-wink-smile'></i></button>
+            <emoji-picker *ngIf="showEmojiPicker" (emoji-click)="addEmoji($event)"></emoji-picker>
+            <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Type a message..." />
+            <button (click)="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>

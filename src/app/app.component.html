@@ -1,0 +1,39 @@
+<router-outlet></router-outlet>
+
+<header>
+  <div class="lona">
+  <div class="profile"></div>
+  <h2 class="logo">Homicorp</h2></div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search" [(ngModel)]="searchValue"/>
+    <i class='bx bx-search' (click)="onSearch()"></i>
+  </div>
+</header>
+<nav class="navigation">
+  <a routerLink="/chats" (click)="showChat()" [ngClass]="[showChats ? 'background-active' : 'background-inactive']">
+    <p>Chats</p><i class="bx bxs-message-rounded-detail custom-icon"></i></a>
+  <a routerLink="/calls" (click)="showCall()" [ngClass]="[showCalls ? 'background-active' : 'background-inactive']">
+    <p>Calls</p><i class="bx bxs-phone-call custom-icon"></i></a>
+  <a routerLink="/Archive" (click)="showPassword()" [ngClass]="[showPass ? 'background-active' : 'background-inactive']">
+    <p>Archive</p><i class="bx bxs-archive-in custom-icon"></i></a>
+  <a routerLink="/contacts" (click)="showContact()" [ngClass]="[showContacts ? 'background-active' : 'background-inactive']">
+    <p>Contacts</p><i class="bx bxs-contact custom-icon"></i></a>
+    
+  <!-- <a routerLink="/calender" (click)="showCalender()" [ngClass]="[showCalender ? 'background-active' : 'background-inactive']">
+      <p>Calender</p><i class="bx bxs-calender custom-icon"></i></a>
+</nav> -->
+<div class="categories" *ngIf="showChats">
+  <app-chats></app-chats>
+</div>
+<div class="categories" *ngIf="showCalls">
+  <app-calls></app-calls>
+</div>
+<div class="categories" *ngIf="showPass">
+  <app-password></app-password>
+</div>
+<div class="categories" *ngIf="showContacts">
+  <app-contacts></app-contacts>
+</div>
+<!-- <div class="categories" *ngIf="showCalender">
+  <app-calender></app-calender>
+</div> -->
